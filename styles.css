@@ -1,0 +1,8 @@
+.choc-wrapper {
+    padding: 2em;
+    max-width: 800px;
+}
+
+.canvas-container {
+    border: 1px solid hsla(0,0%,0%,0.1);
+}
