@@ -25,69 +25,47 @@
 <nav-component></nav-component>
 
 <div id="abizar-wrapper">
-    <h1>Sierpinski Triangles</h1>
+<h1>Step 1: Coordinate System</h1>
 
-    <p>
-       Do you like making cool art? Are you new to programming? If you answered yes to those questions,
-        you are in the right place. In this journey, we'll be exploring how to create patterns like you see below.
-        Use the navbar in the top-right to begin!
-    </p>
+<p>
+    Let's first get familiarized with how to draw lines on the screen.
+    For now, think of <code>pad.makeLine</code> as a magic command that we can write to draw lines on the screen.
+    To instruct this magic function to draw lines, we need to communicate
+    the starting and ending point of the line.
+    <br> <br>
+    Remember the graphs you drew in math class, where each point has an x
+    and a y coordinate? It's the same deal here. We will call the starting
+    point's coordinates x1 and y1, and the ending point's coordinates x2
+    and y2. Drawing a line is as simple as typing <code>pad.makeLine(x1,y1,x2,y2)</code>,
+    changing the symbols to actual numbers like <code>pad.makeLine(0,0,100,100)</code>.
+    <br><br>
+    The dimensions of the drawing canvas are 400 X 400, so all coordinate values
+    need to be positive and less than 400. The top-right of the canvas is (0, 0)
+    and bottom-right is (400, 400).
+    <br><br>
+    Enough talking! Use the slider below to step through execution of the program
+    and visualize what each line of code does. Once you're done, try drawing your own
+    lines to make sure you understand what's going on. For example, you could draw
+    a vertical line in the center of the canvas and a diagonal line from the bottom-left
+    of the canvas to complete the pattern.
+</p>
 
-    <img alt="Sierpinski Triangle" src="img/sierpinski.png">
-
-    <div class='choc-wrapper'>
-        <div class='canvas-container'>
-            <div id='canvas'></div>
-        </div>
-        <div class='canvas-editor' id='choc-editor'></div>
+<div class='choc-wrapper'>
+    <div class='canvas-container'>
+        <div id='canvas'></div>
     </div>
+    <div class='canvas-editor' id='choc-editor'></div>
+</div>
 
-    <div id='messages'></div>
+<div id='messages'></div>
 </div>
 
 <script>
   (function () {
-    let code = `let MAX_DEPTH = 3
-init()
-
-function init() {
-  let tri = [[199, 50], [40, 350], [380, 200]]
-  drawTriangle(tri)
-  recurse(tri, 0)
-}
-
-function recurse(tri, depth) {
-  if (depth === MAX_DEPTH) {
-    return;
-  }
-
-  let center_one = findCenter(tri[0], tri[1])
-  let center_two = findCenter(tri[1], tri[2])
-  let center_three = findCenter(tri[2], tri[0])
-  let centers = [center_one, center_two, center_three]
-
-  drawTriangle(centers)
-
-  let new_triangle_one = [centers[0], centers[1], tri[1]]
-  recurse(new_triangle_one, depth + 1);
-
-  let new_triangle_two = [centers[1], centers[2], tri[2]]
-  recurse(new_triangle_two, depth + 1);
-
-  let new_triangle_three = [centers[2], centers[0], tri[0]]
-  recurse(new_triangle_three, depth + 1);
-}
-
-
-function drawTriangle(tri) {
-  pad.makeLine(tri[0][0], tri[0][1], tri[1][0], tri[1][1])
-  pad.makeLine(tri[1][0], tri[1][1], tri[2][0], tri[2][1])
-  pad.makeLine(tri[2][0], tri[2][1], tri[0][0], tri[0][1])
-}
-
-function findCenter(pt_one,pt_two) {
-  return [(pt_one[0] + pt_two[0]) / 2, (pt_one[1] + pt_two[1]) / 2]
-}`
+    let code = `pad.makeLine(0, 0, 100, 100)
+pad.makeLine(400, 400, 300, 300)
+pad.makeLine(400, 0, 300, 100)
+pad.makeLine(0, 200, 400, 200)`
     $(document).ready(setupAbizarCode(code))
   }.call(this));
 </script>

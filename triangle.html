@@ -25,15 +25,29 @@
 <nav-component></nav-component>
 
 <div id="abizar-wrapper">
-    <h1>Sierpinski Triangles</h1>
+    <h1>Step 2: Triangles</h1>
 
     <p>
-       Do you like making cool art? Are you new to programming? If you answered yes to those questions,
-        you are in the right place. In this journey, we'll be exploring how to create patterns like you see below.
-        Use the navbar in the top-right to begin!
-    </p>
+       Let us now see how we can use our knowledge of line-drawing to draw
+        a triangle. Since a triangle is just three lines, if we have
+        three points <code>(x1, y1)</code>, <code>(x2, y2)</code>
+        and <code>(x3, y3)</code>, we could draw a line between
+        each of the points to draw a triangle. Simple, right?
+        <br><br>
+        Below, you will notice the first line of code reads
+        <code>let x1 = 100</code>. The command <code>let</code> creates something
+        called a variable. You can think of a variable as a box
+        that stores a value inside of it - whenever we open
+        the box <code>x1</code>, we will get out the value 100.
+        For now, we use these boxes just so we can have a consistent way of
+        referring to the same value multiple times.
 
-    <img alt="Sierpinski Triangle" src="img/sierpinski.png">
+        <br><br>
+        Step through the program below to see what's happening. This time,
+        try scrolling on one of the numbers to change its value and
+        see how it changes the image. As a thought experiment, how would you change
+        this code to draw a rectangle instead of a triangle?
+    </p>
 
     <div class='choc-wrapper'>
         <div class='canvas-container'>
@@ -47,47 +61,16 @@
 
 <script>
   (function () {
-    let code = `let MAX_DEPTH = 3
-init()
+    let code = `let x1 = 100
+let y1 = 100
+let x2 = 300
+let y2 = 300
+let x3 = 300
+let y3 = 100
 
-function init() {
-  let tri = [[199, 50], [40, 350], [380, 200]]
-  drawTriangle(tri)
-  recurse(tri, 0)
-}
-
-function recurse(tri, depth) {
-  if (depth === MAX_DEPTH) {
-    return;
-  }
-
-  let center_one = findCenter(tri[0], tri[1])
-  let center_two = findCenter(tri[1], tri[2])
-  let center_three = findCenter(tri[2], tri[0])
-  let centers = [center_one, center_two, center_three]
-
-  drawTriangle(centers)
-
-  let new_triangle_one = [centers[0], centers[1], tri[1]]
-  recurse(new_triangle_one, depth + 1);
-
-  let new_triangle_two = [centers[1], centers[2], tri[2]]
-  recurse(new_triangle_two, depth + 1);
-
-  let new_triangle_three = [centers[2], centers[0], tri[0]]
-  recurse(new_triangle_three, depth + 1);
-}
-
-
-function drawTriangle(tri) {
-  pad.makeLine(tri[0][0], tri[0][1], tri[1][0], tri[1][1])
-  pad.makeLine(tri[1][0], tri[1][1], tri[2][0], tri[2][1])
-  pad.makeLine(tri[2][0], tri[2][1], tri[0][0], tri[0][1])
-}
-
-function findCenter(pt_one,pt_two) {
-  return [(pt_one[0] + pt_two[0]) / 2, (pt_one[1] + pt_two[1]) / 2]
-}`
+pad.makeLine(x1, y1, x2, y2)
+pad.makeLine(x2, y2, x3, y3)
+pad.makeLine(x3, y3, x1, y1)`
     $(document).ready(setupAbizarCode(code))
   }.call(this));
 </script>

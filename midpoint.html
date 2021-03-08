@@ -25,15 +25,18 @@
 <nav-component></nav-component>
 
 <div id="abizar-wrapper">
-    <h1>Sierpinski Triangles</h1>
+    <h1>Step 4: Midpoint</h1>
 
     <p>
-       Do you like making cool art? Are you new to programming? If you answered yes to those questions,
-        you are in the right place. In this journey, we'll be exploring how to create patterns like you see below.
-        Use the navbar in the top-right to begin!
+        To create our Sierpinski Triangle, we need to be able to compute the midpoint of a line.
+        You probably learned in math class that the point <code>[(x1+x2)/2,(y1+y2)/2]</code>
+        gives us the midpoint of a line. Let's use that! Step through the code below and try changing the values
+        of <code>pt_one</code> and <code>pt_two</code> and notice that our midpoint calculation always works.
+        <br><br>
+        Interestingly, we can write a more generalized version of finding the point one-third or one-fourth away
+        from <code>pt_one</code>, or any fraction away. Experiment with changing the <code>fraction</code>
+        variable to different values and try to think about why this formula works!
     </p>
-
-    <img alt="Sierpinski Triangle" src="img/sierpinski.png">
 
     <div class='choc-wrapper'>
         <div class='canvas-container'>
@@ -47,47 +50,26 @@
 
 <script>
   (function () {
-    let code = `let MAX_DEPTH = 3
-init()
+    let code = `let pt_one = [144, 350]
+let pt_two = [370, 56]
 
-function init() {
-  let tri = [[199, 50], [40, 350], [380, 200]]
-  drawTriangle(tri)
-  recurse(tri, 0)
-}
+pad.makeLine(pt_one[0], pt_one[1], pt_two[0], pt_two[1])
 
-function recurse(tri, depth) {
-  if (depth === MAX_DEPTH) {
-    return;
-  }
+let midpoint = [
+    (1/2)*pt_one[0] + (1/2)*pt_two[0],
+    (1/2)*pt_one[1] + (1/2)*pt_two[1]
+]
 
-  let center_one = findCenter(tri[0], tri[1])
-  let center_two = findCenter(tri[1], tri[2])
-  let center_three = findCenter(tri[2], tri[0])
-  let centers = [center_one, center_two, center_three]
+pad.makeLine(0, 0, midpoint[0], midpoint[1])
 
-  drawTriangle(centers)
+let fraction = 0.25
 
-  let new_triangle_one = [centers[0], centers[1], tri[1]]
-  recurse(new_triangle_one, depth + 1);
+let pt_along_line = [
+    (fraction)*pt_one[0] + (1-fraction)*pt_two[0],
+    (fraction)*pt_one[1] + (1-fraction)*pt_two[1]
+]
 
-  let new_triangle_two = [centers[1], centers[2], tri[2]]
-  recurse(new_triangle_two, depth + 1);
-
-  let new_triangle_three = [centers[2], centers[0], tri[0]]
-  recurse(new_triangle_three, depth + 1);
-}
-
-
-function drawTriangle(tri) {
-  pad.makeLine(tri[0][0], tri[0][1], tri[1][0], tri[1][1])
-  pad.makeLine(tri[1][0], tri[1][1], tri[2][0], tri[2][1])
-  pad.makeLine(tri[2][0], tri[2][1], tri[0][0], tri[0][1])
-}
-
-function findCenter(pt_one,pt_two) {
-  return [(pt_one[0] + pt_two[0]) / 2, (pt_one[1] + pt_two[1]) / 2]
-}`
+pad.makeLine(0, 0, pt_along_line[0], pt_along_line[1])`
     $(document).ready(setupAbizarCode(code))
   }.call(this));
 </script>

@@ -1,0 +1,81 @@
+<html class='no-js' lang='en'>
+
+<head>
+    <title>Creative Coding Step-Through</title>
+    <script src="components/nav.js" type="text/javascript"></script>
+    <script src="components/resources.js" type="text/javascript"></script>
+    <link href='styles.css' rel='stylesheet'>
+    <resources-component></resources-component>
+    <script src='https://www.fullstack.io/choc/components/jquery/jquery.min.js'></script>
+    <script src='https://www.fullstack.io/choc/components/spin.js/dist/spin.min.js'></script>
+    <script src='https://www.fullstack.io/choc/components/components-foundation/js/foundation.min.js'></script>
+    <script src='https://www.fullstack.io/choc/components/codemirror/lib/codemirror.js'></script>
+    <script src='https://www.fullstack.io/choc/components/codemirror/mode/javascript/javascript.js'></script>
+    <script src='https://www.fullstack.io/choc/components/codemirror-interactive-numbers/dist/codemirror-interactive-numbers.browser.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/vendor/custom.modernizr.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/vendor/jquery-ui-1.10.3.custom.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/vendor/jquery.ui.touch-punch.min.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/vendor/two.js'></script>
+    <script src='https://www.fullstack.io/choc/components/choc/dist/choc.browser.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/choc/two-annotations.js'></script>
+    <script src='components/setup.js'></script>
+</head>
+<body>
+
+<nav-component></nav-component>
+
+<div id="abizar-wrapper">
+    <h1>Step 3: Arrays</h1>
+
+    <p>
+       In our last exercise, the variables <code>x1, y1, x2, y2, x3, y3</code> were
+        all floating around separately as distinct objects. It would be better if we could group <code>x1</code>
+        and <code>y1</code> together because they are both coordinates of the same point.
+        Furthermore, we'd like to group all the variables together because they are all
+        components of the same triangle.
+        <br><br>
+        To solve this problem, we use something called an array that we create using the
+        <code>[]</code> command. Think of an array like a bookshelf in a library - if we
+        want to store all comic books together, we'd store them all on the same shelf. And we'd do the
+        same for biology, cooking and sports books. In the same
+        way, we will store each point in its own array with two values inside of it, the x coordinate and
+        y coordinate.
+        <br><br>
+        But how will we group multiple points together inside a triangle? Think back to the bookshelf
+        analogy - how would we group together all kids books (with categories like comic books,
+        sports books, and drawing books)? We'd group all kids books in one rack of shelves, with each
+        shelf as a different category. Similarly, to store a triangle, we can store it as an array of arrays,
+        where the outer array has three elements, and each inner array is
+        a point with two elements inside of it.
+        <br><br>
+        To access elements of an array, we use the command <code>array[i]</code> where <code>i</code>
+        represents the <code>i-th</code> element of the array. Step through the code below
+        and then see what changes when you change <code>array[0]</code> to <code>array[3]</code>.
+    </p>
+
+    <div class='choc-wrapper'>
+        <div class='canvas-container'>
+            <div id='canvas'></div>
+        </div>
+        <div class='canvas-editor' id='choc-editor'></div>
+    </div>
+
+    <div id='messages'></div>
+</div>
+
+<script>
+  (function () {
+    let code = `let array = [100, 200, 300, 400]
+pad.makeLine(0, 0, 400, array[0])
+pad.makeLine(0, 0, 400, array[1])
+
+
+let triangle = [[100, 100], [200, 200], [200, 100]]
+pad.makeLine(triangle[0][0], triangle[0][1], triangle[1][0], triangle[1][1])
+pad.makeLine(triangle[1][0], triangle[1][1], triangle[2][0], triangle[2][1])
+pad.makeLine(triangle[2][0], triangle[2][1], triangle[0][0], triangle[0][1])`
+    $(document).ready(setupAbizarCode(code))
+  }.call(this));
+</script>
+</body>
+</html>

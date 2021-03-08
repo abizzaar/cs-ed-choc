@@ -1,8 +1,39 @@
-.choc-wrapper {
+#abizar-wrapper {
+    max-width: 1000px;
+    margin: auto !important;
     padding: 2em;
-    max-width: 800px;
+    margin-bottom: 500px !important;
 }
 
-.canvas-container {
+nav {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+table {
+    width: 300px;
+}
+
+img {
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    padding: 1em;
+}
+
+a {
+    cursor: pointer;
+    font-size: 24px;
+    color: hsla(0, 0%, 0%, 0.7) !important;
+    margin-right: 10px;
+}
+
+a:hover {
+    font-weight: bold;
+    color: black !important;
+}
+
+canvas {
     border: 1px solid hsla(0,0%,0%,0.1);
 }
