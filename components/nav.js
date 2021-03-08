@@ -12,9 +12,9 @@ class Nav extends HTMLElement {
     <a href="array.html">3</a>
     <a href="midpoint.html">4</a>
     <a href="function.html">5</a>
-    <a href="xx.html">6</a>
-    <a href="xx.html">7</a> 
-    <a href="xx.html">8</a>
+    <a href="recursion.html">6</a>
+    <a href="split.html">7</a> 
+    <a href="sierpinski.html">8</a>
 </nav>`
   }
 }

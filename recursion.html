@@ -25,22 +25,28 @@
 <nav-component></nav-component>
 
 <div id="abizar-wrapper">
-    <h1>Step 8: Congrats!</h1>
+    <h1>Step 6: Recursion</h1>
 
     <p>
-        We've finally learned all the concepts necessary to create our Sierpinski Triangle. Step through the code below
-        and change the MAX_DEPTH value to add more levels of recursion.
+        So far, we've learned how to create simple patterns, but in the Sierpinski Triangle
+        we're creating many triangles, and we're also drawing triangles within triangles. How do we
+        accomplish this?
         <br><br>
-        As for next steps, it would be great if you could adapt the code
-        to make other interesting patterns, or create your own recursive patterns from scratch! For instance, I created
-        the below 3 patterns by just changing 3-4 lines of the code below. Can you create any of these?
+        We can use a technique called recursion. Put simply, recursion is when a function calls itself. Let's
+        say we have a function that draws a smaller triangle within itself. How do we make this process repeat
+        itself, so we can then draw an even smaller triangle within the small triangle, and keep going? Using
+        recursion, we can simply call the same function at the end of our function, which will make the process repeat.
+        <br><br>
+        Step through the code below and try to understand what's happening! You'll notice each time we call the function
+        <code>recurse</code> we pass as input the smaller triangle, not the original triangle. If we passed in the original
+        triangle, we would keep drawing over the same triangle. Try changing the line
+        <code>recurse([midpoint_one, midpoint_two, midpoint_three], depth + 1)</code> to
+        <code>recurse(tri, depth + 1)</code> and see what happens! There's another subtle point to notice - what would
+        happen if every time the function ran it called itself to start the process again? The program would keep running
+        and never end! To solve this, we pass in a second input <code>depth</code> to our function that represents
+        the depth of our function calls. Every time we recurse, we increase the depth value by 1. Try changing
+        the variable <code>MAX_DEPTH</code> and see how it changes the pattern.
     </p>
-
-    <div class="image-container">
-        <img alt="Adapted Sierpinski 1" src="img/adapted-1.png">
-        <img alt="Adapted Sierpinski 2" src="img/adapted-2.png">
-        <img alt="Adapted Sierpinski 3" src="img/adapted-3.png">
-    </div>
 
     <div class='choc-wrapper'>
         <div class='canvas-container'>
@@ -55,36 +61,23 @@
 <script>
   (function () {
     let code = `let MAX_DEPTH = 3
-init()
 
-function init() {
-  let tri = [[199, 50], [40, 350], [380, 200]]
-  drawTriangle(tri)
-  recurse(tri, 0)
-}
+recurse([[96, 27], [30, 378], [378, 187]], 0)
 
 function recurse(tri, depth) {
-  if (depth === MAX_DEPTH) {
-    return;
+
+  if (depth == MAX_DEPTH) {
+    return
   }
 
-  let center_one = findCenter(tri[0], tri[1])
-  let center_two = findCenter(tri[1], tri[2])
-  let center_three = findCenter(tri[2], tri[0])
-  let centers = [center_one, center_two, center_three]
+  drawTriangle(tri)
 
-  drawTriangle(centers)
+  let midpoint_one = findMidpoint(tri[0], tri[1])
+  let midpoint_two = findMidpoint(tri[1], tri[2])
+  let midpoint_three = findMidpoint(tri[2], tri[0])
+  recurse([midpoint_one, midpoint_two, midpoint_three], depth + 1)
 
-  let new_triangle_one = [centers[0], centers[1], tri[1]]
-  recurse(new_triangle_one, depth + 1);
-
-  let new_triangle_two = [centers[1], centers[2], tri[2]]
-  recurse(new_triangle_two, depth + 1);
-
-  let new_triangle_three = [centers[2], centers[0], tri[0]]
-  recurse(new_triangle_three, depth + 1);
 }
-
 
 function drawTriangle(tri) {
   pad.makeLine(tri[0][0], tri[0][1], tri[1][0], tri[1][1])
@@ -92,9 +85,11 @@ function drawTriangle(tri) {
   pad.makeLine(tri[2][0], tri[2][1], tri[0][0], tri[0][1])
 }
 
-function findCenter(pt_one,pt_two) {
+function findMidpoint(pt_one,pt_two) {
   return [(pt_one[0] + pt_two[0]) / 2, (pt_one[1] + pt_two[1]) / 2]
-}`
+}
+
+undefined // ignore this`
     $(document).ready(setupAbizarCode(code))
   }.call(this));
 </script>

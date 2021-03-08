@@ -2,7 +2,7 @@
     max-width: 1000px;
     margin: auto !important;
     padding: 2em;
-    margin-bottom: 500px !important;
+    margin-bottom: 100px !important;
 }
 
 nav {
@@ -16,10 +16,23 @@ table {
 }
 
 img {
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     margin: auto;
     padding: 1em;
+    display: block !important;
+}
+
+
+.image-container {
+    display: flex;
+    justify-content: center;
+}
+
+.image-container > img {
+    width: 300px;
+    height: 300px;
+    margin: 0;
 }
 
 a {
@@ -36,4 +49,5 @@ a:hover {
 
 canvas {
     border: 1px solid hsla(0,0%,0%,0.1);
+    margin-bottom: 100px !important;
 }

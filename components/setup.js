@@ -20,6 +20,7 @@ function setupAbizarCode (code, timeline = false) {
     code: code,
     timeline: timeline,
     timelineValues: false,
+    maxIterations: 100000,
     beforeScrub: function () {
       return pad.clear();
     },

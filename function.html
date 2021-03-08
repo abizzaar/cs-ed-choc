@@ -1,0 +1,102 @@
+<html class='no-js' lang='en'>
+
+<head>
+    <title>Creative Coding Step-Through</title>
+    <script src="components/nav.js" type="text/javascript"></script>
+    <script src="components/resources.js" type="text/javascript"></script>
+    <link href='styles.css' rel='stylesheet'>
+    <resources-component></resources-component>
+    <script src='https://www.fullstack.io/choc/components/jquery/jquery.min.js'></script>
+    <script src='https://www.fullstack.io/choc/components/spin.js/dist/spin.min.js'></script>
+    <script src='https://www.fullstack.io/choc/components/components-foundation/js/foundation.min.js'></script>
+    <script src='https://www.fullstack.io/choc/components/codemirror/lib/codemirror.js'></script>
+    <script src='https://www.fullstack.io/choc/components/codemirror/mode/javascript/javascript.js'></script>
+    <script src='https://www.fullstack.io/choc/components/codemirror-interactive-numbers/dist/codemirror-interactive-numbers.browser.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/vendor/custom.modernizr.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/vendor/jquery-ui-1.10.3.custom.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/vendor/jquery.ui.touch-punch.min.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/vendor/two.js'></script>
+    <script src='https://www.fullstack.io/choc/components/choc/dist/choc.browser.js'></script>
+    <script src='https://www.fullstack.io/choc/scripts/choc/two-annotations.js'></script>
+    <script src='components/setup.js'></script>
+</head>
+<body>
+
+<nav-component></nav-component>
+
+<div id="abizar-wrapper">
+    <h1>Step 5: Functions</h1>
+
+    <p>
+       So far, we've learned how to draw a triangle and find the midpoint of a line, but what if
+        we wanted to draw many triangles and find the midpoints of many lines? Currently, we would
+        have to copy-paste our code repeatedly to do this, which would make our code lengthy, and
+        could cause mistakes. What if we used <code>y1</code> where we meant to type <code>x1</code>?
+        That would cause our code to not work as we expect it to, and copy-pasting code repeatedly
+        is more likely to cause this behavior. Also, what if we wanted to change how we draw a triangle
+        to draw red lines instead of black lines? We would have to change the code in multiple places,
+        which would take a lot of time. It would be nice if we only had to change this in one place.
+        <br><br>
+        To solve this problems, we use something called functions. Think of functions like buying a basketball
+        from a store. What if every time you wanted a new basketball you had to buy the rubber, bladder and
+        other equipment to construct a basketball from its raw materials each time? This would be time-consuming
+        and would cause a lot less people to play basketball. Instead, we have stores that have assembled
+        the machinery to perform all the steps of constructing the basketball, and we just go to a store and buy
+        it ready-made.
+        <br><br>
+        Just like basketball manufacturing, the goal of functions is to hide away the details of performing a task
+        and allow us to reuse the code we've written to do that. For example, we could have functions like
+        <code>drawTriangle</code> and <code>findMidpoint</code> that perform the tasks we need of drawing a triangle
+        and finding a midpoint of a line. Functions have inputs and outputs. We can think of inputs as passing
+        data to the function for it to do its job. In the case of <code>drawTriangle</code>, we need to pass in
+        the 3 points we'd like to connect to draw the triangle. For <code>findMidpoint</code>, we need to pass in
+        the 2 points that represent our line. The output of <code>findMidpoint</code> is the new point that is
+        the midpoint of a line. We indicate that using the <code>return</code> statement.
+        But what is the output of <code>drawTriangle</code>? Strictly speaking,
+        it has no output, and you can see below that it has no <code>return</code> statement. This function
+        uses something called a side effect, so while it does not return something to the code that calls this
+        function, it changes the state of our system - which in our example means that it draws something to
+        the screen.
+        <br><br>
+        Step through the example below and see how we are using functions to perform the same task repeatedly.
+        How would you write a <code>drawRectangle</code> function that takes in an input of 4 points and draws
+        a rectangle?
+    </p>
+
+    <div class='choc-wrapper'>
+        <div class='canvas-container'>
+            <div id='canvas'></div>
+        </div>
+        <div class='canvas-editor' id='choc-editor'></div>
+    </div>
+
+    <div id='messages'></div>
+</div>
+
+<script>
+  (function () {
+    let code = `drawTriangle([[0, 0], [50, 300], [100, 50]])
+drawTriangle([[324, 190], [190, 350], [358, 390]])
+
+let tri = [[194, 50], [40, 350], [380, 200]]
+drawTriangle(tri)
+
+let midpoint_one = findMidpoint(tri[0], tri[1])
+let midpoint_two = findMidpoint(tri[1], tri[2])
+let midpoint_three = findMidpoint(tri[2], tri[0])
+drawTriangle([midpoint_one, midpoint_two, midpoint_three])
+
+function drawTriangle(tri) {
+  pad.makeLine(tri[0][0], tri[0][1], tri[1][0], tri[1][1])
+  pad.makeLine(tri[1][0], tri[1][1], tri[2][0], tri[2][1])
+  pad.makeLine(tri[2][0], tri[2][1], tri[0][0], tri[0][1])
+}
+
+function findMidpoint(pt_one,pt_two) {
+  return [(pt_one[0] + pt_two[0]) / 2, (pt_one[1] + pt_two[1]) / 2]
+}`
+    $(document).ready(setupAbizarCode(code))
+  }.call(this));
+</script>
+</body>
+</html>
