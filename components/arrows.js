@@ -7,7 +7,12 @@ class Arrows extends HTMLElement {
   getPath() {
     const pathname = window.location.pathname
     const lastSlash = pathname.lastIndexOf('/')
-    return pathname.slice(lastSlash+1)
+    let slicedPath = pathname.slice(lastSlash+1)
+    // handle case where <host>/ results in <host>/index.html
+    if (slicedPath === '') {
+      slicedPath = navDirectory[0]
+    }
+    return slicedPath
   }
 
   connectedCallback() {
