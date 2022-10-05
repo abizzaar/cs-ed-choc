@@ -14,6 +14,8 @@ class Arrows extends HTMLElement {
     if (slicedPath === '') {
       slicedPath = navDirectory[0]
     }
+    console.log("-- sliced path after --")
+    console.log(slicedPath)
     return slicedPath
   }
 
