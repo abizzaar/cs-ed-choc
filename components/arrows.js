@@ -9,13 +9,9 @@ class Arrows extends HTMLElement {
     const lastSlash = pathname.lastIndexOf('/')
     let slicedPath = pathname.slice(lastSlash+1)
     // handle case where <host>/ results in <host>/index.html
-    console.log("-- sliced path --")
-    console.log(slicedPath)
     if (slicedPath === '') {
       slicedPath = navDirectory[0]
     }
-    console.log("-- sliced path after --")
-    console.log(slicedPath)
     return slicedPath
   }
 
